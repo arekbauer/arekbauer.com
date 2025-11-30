@@ -1,20 +1,20 @@
-<div class="container-experience">
+<div class="experience-container">
   <header>
-    <h1>Experience</h1>
+    <h1 id="container-headers">Experience</h1>
   </header>
   <br>
 
   <div class="experience-grid">
-    {% for experience in experiences %}
+    {% for experience in experiences reversed %}
     <div class="experience-card">
       <div class="experience-header">
         <div class="experience-left">
-          <h2>{{ experience.subtitle }}</h2>
-          <h3>{{ experience.title }}</h3>
+          <h2 class="company-name">{{ experience.subtitle }}</h2>
+          <h3 class="job-title">{{ experience.title }}</h3>
         </div>
-        <p class="experience-date">{{ experience.start_date }} - {{ experience.end_date_is_null }}</p>
+        <p class="duration">{{ experience.start_date }} - {{ experience.end_date_is_null }}</p>
       </div>
-      <p class="experience-description">{{ experience.description|safe }}</p>
+      <div class="experience-details">{{ experience.description|safe }}</div>
     </div>
     {% endfor %}
   </div>

@@ -1,139 +1,61 @@
-.container-experience {
+.experience-container {
+    max-width: 800px;
     margin: 0 auto;
-    width: 70%;
-    margin-left: 15%;
-    height: auto;
-    border-width: 1px;
+    padding: 2rem;
 }
 
-.container-experience header {
-    margin: 0;
-    text-align: center;
-}
-
-.container-experience h1 {
-    color: var(--lighter-blue);
-    font-family: var(--default-font);
-    font-weight: bold;
-    font-size: 3.4rem;
-}
-
-/* Responsive CSS Grid */
-.experience-grid {
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    gap: 1.5rem;
-    margin-top: 1rem;
-}
-
-/* Experience Card */
 .experience-card {
-    border: 2px solid var(--mid-blue);
-    border-radius: 5px;
-    padding: 1rem;
-    cursor: default;
-    display: flex;
-    flex-direction: column;
-    transition: background-color 0.3s ease;
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 1rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease;
 }
 
 .experience-card:hover {
-    background-color: var(--mid-blue);
+    transform: translateX(10px);
+    border-color: var(--accent-color);
 }
 
-/* Header container with left and date right */
 .experience-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.8rem;
+    align-items: baseline;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 }
 
-/* Left side with subtitle above title */
-.experience-left {
-    display: flex;
-    flex-direction: column;
-}
-
-/* Subtitle */
-.experience-left h2 {
-    color: var(--lightest-blue);
-    font-family: var(--default-font);
+.company-name {
+    font-family: var(--heading-font);
+    font-size: 1.25rem;
     font-weight: 700;
-    font-size: 1.3rem;
-    margin: 0 0 0.2rem 0;
+    color: var(--accent-color);
 }
 
-/* Title */
-.experience-left h3 {
-    color: var(--light-blue);
-    font-family: var(--default-font);
+.job-title {
+    font-size: 1.1rem;
+    color: var(--text-color);
     font-weight: 600;
-    font-size: 1rem;
-    margin: 0;
 }
 
-/* Date aligned vertically center on right */
-.experience-date {
-    color: var(--cream);
+.duration {
     font-family: var(--code-font);
-    font-weight: 400;
-    font-size: 0.85rem;
-    white-space: nowrap;
-    margin-left: 1rem;
-    flex-shrink: 0;
+    font-size: 0.875rem;
+    color: var(--secondary-color);
 }
 
-/* Description */
-.experience-description {
-    color: var(--clear-blue);
-    font-family: var(--default-font);
-    font-weight: 300;
-    font-size: 0.9rem;
-    line-height: 1.5;
-    margin: 0;
+.experience-details {
+    color: var(--secondary-color);
+    list-style-position: inside;
 }
 
-/* Responsive adjustments */
-@media (max-width: 900px) {
-    .container-experience {
-        width: 90%;
-        margin-left: 5%;
-    }
-    .experience-grid {
-        grid-template-columns: 1fr;
-    }
+.experience-details li {
+    margin-bottom: 0.5rem;
 }
 
-@media (max-width: 600px) {
-    .experience-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.3rem;
-        margin-bottom: 0;
-    }
-
-    .experience-date {
-        margin-left: 0;
-        font-size: 0.8rem;
-        align-self: flex-start;
-    }
-}
-
-@media (max-width: 400px) {
-    .container-experience h1 {
-        font-size: 2.6rem;
-    }
-
-    .experience-left h2 {
-        font-size: 1.1rem;
-    }
-
-    .experience-left h3 {
-        font-size: 0.9rem;
-    }
-
-    .experience-description {
-        font-size: 0.85rem;
-    }
+.experience-details li::marker {
+    color: var(--accent-color);
 }
