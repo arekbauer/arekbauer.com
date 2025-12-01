@@ -77,25 +77,26 @@ function removeAnnotations() {
     }
 }
 
+// REMOVED FILTERING FUNCTION IN CURRENT ITERATION
 // Controls the filter buttons on my projects section
-function projectsFunction() {
-    const iso = new Isotope('.projects-grid');
-    const filterButtons = Array.prototype.slice.call(document.querySelectorAll('.filter-button'));
+// function projectsFunction() {
+//     const iso = new Isotope('.projects-grid');
+//     const filterButtons = Array.prototype.slice.call(document.querySelectorAll('.filter-button'));
 
-    filterButtons.map(button => {
-        button.addEventListener('click', function() {
-        filterButtons.map(button => button.classList.remove('active-filter'));
-        const type = this.getAttribute('data-filter');
-        this.classList.add('active-filter');
-        iso.arrange({
-            // item element provided as argument
-            filter: type && `.${type}`
-        });
-        iso.layout();
-        });
-    });
-}
+//     filterButtons.map(button => {
+//         button.addEventListener('click', function() {
+//         filterButtons.map(button => button.classList.remove('active-filter'));
+//         const type = this.getAttribute('data-filter');
+//         this.classList.add('active-filter');
+//         iso.arrange({
+//             // item element provided as argument
+//             filter: type && `.${type}`
+//         });
+//         iso.layout();
+//         });
+//     });
+// }
 
-window.addEventListener('load', () => {
-    projectsFunction();
-})
+// window.addEventListener('load', () => {
+//     projectsFunction();
+// })
