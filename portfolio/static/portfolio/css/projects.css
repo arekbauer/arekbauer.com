@@ -1,4 +1,3 @@
-/* Update your card to fill the Bootstrap column */
 .project-card {
     background: var(--card-bg);
     border: 1px solid var(--glass-border);
@@ -49,12 +48,12 @@
 }
 
 .tech-tag {
-    font-family: var(--code-font);
     font-size: 0.875rem;
-    color: var(--accent-color);
-    background: rgba(56, 189, 248, 0.1);
+    background: rgba(13, 148, 136, 0.1); 
     padding: 0.25rem 0.75rem;
     border-radius: 9999px;
+    color: var(--accent-color);
+    border: 1px solid rgba(13, 148, 136, 0.2);
 }
 
 .project-links {
