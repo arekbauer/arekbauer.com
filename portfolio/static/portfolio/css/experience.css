@@ -4,6 +4,7 @@
     border-radius: 1rem;
     padding: 2rem;
     margin-bottom: 2rem;
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     transition: transform 0.3s ease;
 }
@@ -37,7 +38,7 @@
 }
 
 .duration {
-    font-family: var(--code-font);
+    font-family: var(--heading-font);
     font-size: 0.875rem;
     color: var(--secondary-color);
 }

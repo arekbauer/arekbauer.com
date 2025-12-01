@@ -37,9 +37,9 @@
         <div class="right">
             {% for intro in intros %}
             <picture>
-                <source srcset="{{ intro.image_small.url }}" media="(max-width: 770px)">
+                <source srcset="{{ intro.image_small.url }}" media="(max-width: 968px)">
                 <!-- Wider than 770px -->
-                <source srcset="{{ intro.image.url }}" media="(min-width: 771px)">
+                <source srcset="{{ intro.image.url }}" media="(min-width: 969px)">
                 <!-- Fallback image -->
                 <img src="{{ intro.image.url }}" alt="Responsive Image" class="profile-pic">
             </picture>

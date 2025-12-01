@@ -24,6 +24,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="song-title">${data.title}</span>
                         <span class="artist-name">${data.artist}</span>
                     </div>
+                    <div class="audio-wave d-none d-md-flex">
+                        <div class="audio-wave-bar"></div>
+                        <div class="audio-wave-bar"></div>
+                        <div class="audio-wave-bar"></div>
+                        <div class="audio-wave-bar"></div>
+                    </div>
                 </div>
             </a>
         `;
