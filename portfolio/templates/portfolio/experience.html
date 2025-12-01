@@ -1,20 +1,26 @@
-<div class="container-experience">
-  <header>
-    <h1>Experience</h1>
+<div class="container py-5 d-flex flex-column" style="max-width: 800px;">
+  <header class="mb-4">
+    <h1 id="container-headers">Experience</h1>
   </header>
   <br>
 
-  <div class="experience-grid">
-    {% for experience in experiences %}
+  <div class="d-flex flex-column gap-4">
+    {% for experience in experiences reversed %}
     <div class="experience-card">
       <div class="experience-header">
         <div class="experience-left">
-          <h2>{{ experience.subtitle }}</h2>
-          <h3>{{ experience.title }}</h3>
+          <h2 class="company-name">{{ experience.subtitle }}</h2>
+          <h3 class="job-title">{{ experience.title }}</h3>
         </div>
-        <p class="experience-date">{{ experience.start_date }} - {{ experience.end_date_is_null }}</p>
+        <p class="duration">{{ experience.start_date }} - {{ experience.end_date_is_null }}</p>
       </div>
-      <p class="experience-description">{{ experience.description|safe }}</p>
+      <div class="experience-details">{{ experience.description|safe }}</div>
+
+      <div class="project-tech mt-auto mb-0">
+        {% for skill in experience.get_skills_list %}
+            <span class="tech-tag">{{ skill }}</span>
+        {% endfor %}
+      </div>
     </div>
     {% endfor %}
   </div>

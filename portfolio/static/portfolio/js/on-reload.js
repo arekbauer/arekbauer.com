@@ -1,7 +1,7 @@
 import { annotate, annotationGroup  } from './rough-notation.esm.js';
 
-let blueClear = '#233554';
-let lighterBlue = '#CCD6F6';
+let blueClear = 'rgba(45, 212, 191, 0.25)';
+let lighterBlue = '#2dd4bf';
 let annotationGroupInstance = null;
 
 let lightmode = localStorage.getItem('lightmode')
@@ -11,16 +11,16 @@ const themeSwitch = document.getElementById('theme-switch')
 const enableLightmode = () => {
     document.body.classList.add('lightmode')
     localStorage.setItem('lightmode', 'active')
-    blueClear = '#e1dbd1';
-    lighterBlue = '#000000';
+    blueClear = 'rgba(13, 148, 136, 0.15)';
+    lighterBlue = '#0d9488';
 }
 
 // Runs when lightmode is disabled
 const disableLightmode = () => {
     document.body.classList.remove('lightmode')
     localStorage.setItem('lightmode', null)
-    blueClear = '#233554';
-    lighterBlue = '#CCD6F6';
+    blueClear = 'rgba(45, 212, 191, 0.25)';
+    lighterBlue = '#2dd4bf';
 }
 
 // Checks memory if lightmode was active last
@@ -37,36 +37,44 @@ themeSwitch.addEventListener("click", () => {
 
 // My Rough Notation handler
 function roughNotionFunction() {
+    removeAnnotations();
+
     // Define variables
     const textAnnotations = [];
-
     const title = document.querySelector('.highlight');
     const elements = document.querySelectorAll('.about-me span');
 
-    // Define animations
-    elements.forEach(element => {
-        
-        const annotation = annotate(element, { 
-            type: 'highlight', 
-            color: blueClear,
-            iterations: 1,
+    // Safety: Check if elements exist before trying to map them
+    if (elements.length > 0) {
+        elements.forEach(element => {
+            const annotation = annotate(element, { 
+                type: 'highlight', 
+                color: blueClear,
+                iterations: 1,
+            });
+            textAnnotations.push(annotation);
         });
-        textAnnotations.push(annotation);
-    });
+    }
 
-    const a1 = annotate(title, { 
-        type: 'underline', 
-        color: lighterBlue, 
-        padding: 0
-    });
+    // Combine annotations (only include title if it exists)
+    let allAnnotations = [...textAnnotations];
+    
+    if (title) {
+        const a1 = annotate(title, { 
+            type: 'underline', 
+            color: lighterBlue, 
+            padding: 0
+        });
+        allAnnotations = [a1, ...allAnnotations];
+    }
 
-    // Combine all annotations into one group
-    const allAnnotations = [a1, ...textAnnotations ];
-
-    // Show the annotation group with animation
-    annotationGroupInstance = annotationGroup(allAnnotations);
-    annotationGroupInstance.show(); 
+    // Show the annotation group
+    if (allAnnotations.length > 0) {
+        annotationGroupInstance = annotationGroup(allAnnotations);
+        annotationGroupInstance.show(); 
+    }
 }
+// Expose to window so your API calls can trigger it
 window.roughNotionFunction = roughNotionFunction;
 
 // Checks if there are any current active annotations
@@ -75,27 +83,33 @@ function removeAnnotations() {
         annotationGroupInstance.hide();
         annotationGroupInstance = null;
     }
-}
 
-// Controls the filter buttons on my projects section
-function projectsFunction() {
-    const iso = new Isotope('.projects-grid');
-    const filterButtons = Array.prototype.slice.call(document.querySelectorAll('.filter-button'));
-
-    filterButtons.map(button => {
-        button.addEventListener('click', function() {
-        filterButtons.map(button => button.classList.remove('active-filter'));
-        const type = this.getAttribute('data-filter');
-        this.classList.add('active-filter');
-        iso.arrange({
-            // item element provided as argument
-            filter: type && `.${type}`
-        });
-        iso.layout();
-        });
+    const existingSVGs = document.querySelectorAll('svg.rough-annotation');
+    existingSVGs.forEach(svg => {
+        svg.remove();
     });
 }
 
-window.addEventListener('load', () => {
-    projectsFunction();
-})
+// REMOVED FILTERING FUNCTION IN CURRENT ITERATION
+// Controls the filter buttons on my projects section
+// function projectsFunction() {
+//     const iso = new Isotope('.projects-grid');
+//     const filterButtons = Array.prototype.slice.call(document.querySelectorAll('.filter-button'));
+
+//     filterButtons.map(button => {
+//         button.addEventListener('click', function() {
+//         filterButtons.map(button => button.classList.remove('active-filter'));
+//         const type = this.getAttribute('data-filter');
+//         this.classList.add('active-filter');
+//         iso.arrange({
+//             // item element provided as argument
+//             filter: type && `.${type}`
+//         });
+//         iso.layout();
+//         });
+//     });
+// }
+
+// window.addEventListener('load', () => {
+//     projectsFunction();
+// })
