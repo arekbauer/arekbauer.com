@@ -37,36 +37,44 @@ themeSwitch.addEventListener("click", () => {
 
 // My Rough Notation handler
 function roughNotionFunction() {
+    removeAnnotations();
+
     // Define variables
     const textAnnotations = [];
-
     const title = document.querySelector('.highlight');
     const elements = document.querySelectorAll('.about-me span');
 
-    // Define animations
-    elements.forEach(element => {
-        
-        const annotation = annotate(element, { 
-            type: 'highlight', 
-            color: blueClear,
-            iterations: 1,
+    // Safety: Check if elements exist before trying to map them
+    if (elements.length > 0) {
+        elements.forEach(element => {
+            const annotation = annotate(element, { 
+                type: 'highlight', 
+                color: blueClear,
+                iterations: 1,
+            });
+            textAnnotations.push(annotation);
         });
-        textAnnotations.push(annotation);
-    });
+    }
 
-    const a1 = annotate(title, { 
-        type: 'underline', 
-        color: lighterBlue, 
-        padding: 0
-    });
+    // Combine annotations (only include title if it exists)
+    let allAnnotations = [...textAnnotations];
+    
+    if (title) {
+        const a1 = annotate(title, { 
+            type: 'underline', 
+            color: lighterBlue, 
+            padding: 0
+        });
+        allAnnotations = [a1, ...allAnnotations];
+    }
 
-    // Combine all annotations into one group
-    const allAnnotations = [a1, ...textAnnotations ];
-
-    // Show the annotation group with animation
-    annotationGroupInstance = annotationGroup(allAnnotations);
-    annotationGroupInstance.show(); 
+    // Show the annotation group
+    if (allAnnotations.length > 0) {
+        annotationGroupInstance = annotationGroup(allAnnotations);
+        annotationGroupInstance.show(); 
+    }
 }
+// Expose to window so your API calls can trigger it
 window.roughNotionFunction = roughNotionFunction;
 
 // Checks if there are any current active annotations
@@ -75,6 +83,11 @@ function removeAnnotations() {
         annotationGroupInstance.hide();
         annotationGroupInstance = null;
     }
+
+    const existingSVGs = document.querySelectorAll('svg.rough-annotation');
+    existingSVGs.forEach(svg => {
+        svg.remove();
+    });
 }
 
 // REMOVED FILTERING FUNCTION IN CURRENT ITERATION
