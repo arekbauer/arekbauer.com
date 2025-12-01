@@ -1,4 +1,9 @@
 /* About Me Section */
+
+.valo-cursor {
+    cursor: url('/static/portfolio/valo-cursor.png'), auto;
+}
+
 .about-container {
     display: flex;
     width: 100%;

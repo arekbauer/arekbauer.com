@@ -15,6 +15,12 @@
         <p class="duration">{{ experience.start_date }} - {{ experience.end_date_is_null }}</p>
       </div>
       <div class="experience-details">{{ experience.description|safe }}</div>
+
+      <div class="project-tech mt-auto mb-0">
+        {% for skill in experience.get_skills_list %}
+            <span class="tech-tag">{{ skill }}</span>
+        {% endfor %}
+      </div>
     </div>
     {% endfor %}
   </div>

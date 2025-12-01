@@ -42,15 +42,24 @@
     color: var(--secondary-color);
 }
 
-.experience-details {
-    color: var(--secondary-color);
-    list-style-position: inside;
+.experience-details ul {
+    margin: 0;
+    padding-left: 1.25rem;
+    padding-bottom: 1rem; 
+    list-style-type: disc;
 }
 
 .experience-details li {
-    margin-bottom: 0.5rem;
+    color: var(--secondary-color); 
+    margin-bottom: 0.75rem;    
+    line-height: 1.6;
 }
 
 .experience-details li::marker {
     color: var(--accent-color);
+}
+
+.experience-details strong {
+    color: var(--text-color);     
+    font-weight: 600;
 }

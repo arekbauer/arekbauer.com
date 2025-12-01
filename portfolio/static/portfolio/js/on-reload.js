@@ -1,7 +1,7 @@
 import { annotate, annotationGroup  } from './rough-notation.esm.js';
 
-let blueClear = '#233554';
-let lighterBlue = '#CCD6F6';
+let blueClear = 'rgba(45, 212, 191, 0.25)';
+let lighterBlue = '#2dd4bf';
 let annotationGroupInstance = null;
 
 let lightmode = localStorage.getItem('lightmode')
@@ -11,16 +11,16 @@ const themeSwitch = document.getElementById('theme-switch')
 const enableLightmode = () => {
     document.body.classList.add('lightmode')
     localStorage.setItem('lightmode', 'active')
-    blueClear = '#e1dbd1';
-    lighterBlue = '#000000';
+    blueClear = 'rgba(13, 148, 136, 0.15)';
+    lighterBlue = '#0d9488';
 }
 
 // Runs when lightmode is disabled
 const disableLightmode = () => {
     document.body.classList.remove('lightmode')
     localStorage.setItem('lightmode', null)
-    blueClear = '#233554';
-    lighterBlue = '#CCD6F6';
+    blueClear = 'rgba(45, 212, 191, 0.25)';
+    lighterBlue = '#2dd4bf';
 }
 
 // Checks memory if lightmode was active last

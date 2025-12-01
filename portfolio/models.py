@@ -18,6 +18,7 @@ class Intro(models.Model):
 class Experience(models.Model):
     title = models.CharField(max_length=30)
     subtitle = models.CharField(max_length = 30, null=True)
+    skills = models.CharField(max_length=200, blank=True, help_text="Separate skills with commas (e.g. Python, CSS, AWS)")
     start_date = models.PositiveSmallIntegerField()
     end_date = models.PositiveSmallIntegerField(blank=True, null=True)
     description = models.TextField()
@@ -25,3 +26,8 @@ class Experience(models.Model):
     @property
     def end_date_is_null(self):
         return self.end_date or "Present"
+    
+    def get_skills_list(self):
+        if not self.skills:
+            return []
+        return [skill.strip() for skill in self.skills.split(',')]
