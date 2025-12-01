@@ -1,27 +1,15 @@
 /* Update your card to fill the Bootstrap column */
 .project-card {
-    /* Keep all your existing colors/borders/shadows here */
     background: var(--card-bg);
     border: 1px solid var(--glass-border);
     border-radius: 1rem;
     padding: 2rem;
-    
-    /* VITAL: This makes the card fill the height of the row */
-    height: 100%; 
+
+    height: 100%;
     display: flex;
     flex-direction: column;
-}
-
-.project-card {
-    background: var(--card-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: 1rem;
-    padding: 2rem;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     backdrop-filter: blur(10px);
-    display: flex;
-    flex-direction: column;
-    height: 100%;
 }
 
 .project-card:hover {
@@ -113,3 +101,10 @@
     background: var(--accent-color);
     color: var(--bg-color);
 } */
+
+/* Responsive Design */
+@media (max-width: 968px) {
+    .project-card img {
+        display: none;
+    }
+}
