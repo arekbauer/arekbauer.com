@@ -29,6 +29,8 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
       - name: Run Tests
+        env:
+          SECRET_KEY: "django-insecure-dummy-key-for-testing-only"
         run: |
           python manage.py test
 

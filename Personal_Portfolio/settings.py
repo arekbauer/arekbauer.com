@@ -28,9 +28,18 @@ SPOTIFY_REFRESH_TOKEN = os.getenv('SPOTIFY_REFRESH_TOKEN')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-with open(os.path.join(BASE_DIR, 'secret_key.txt')) as f:
-    SECRET_KEY = f.read().strip()
+SECRET_KEY = os.environ.get('SECRET_KEY')
+
+if not SECRET_KEY:
+    try:
+        with open(os.path.join(BASE_DIR, 'secret_key.txt')) as f:
+            SECRET_KEY = f.read().strip()
+    except FileNotFoundError:
+        # Might be in a new environment
+        pass
+
+if not SECRET_KEY:
+    raise ValueError("CRITICAL ERROR: No SECRET_KEY found in Env or file.")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # Production Settings:
