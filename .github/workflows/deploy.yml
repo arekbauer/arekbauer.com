@@ -51,5 +51,3 @@ jobs:
           working_directory: ${{ secrets.PA_WORKING_DIRECTORY }}
           venv_directory: ${{ secrets.PA_VENV_DIRECTORY }}
           wsgi_file: ${{ secrets.PA_WSGI_PATH }}
-          
-          install_requirements: 'true'
