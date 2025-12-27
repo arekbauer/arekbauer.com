@@ -30,7 +30,7 @@ jobs:
 
       - name: Run Tests
         env:
-          SECRET_KEY: "django-insecure-dummy-key-for-testing-only"
+          SECRET_KEY: "django-dummy-key"
         run: |
           python manage.py test
 
