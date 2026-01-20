@@ -17,13 +17,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls.static import static
+from django.urls import path, include
 from django.conf import settings
 from portfolio import views 
 
 urlpatterns = [
+    # Website URLs
     path('api/now-playing/', views.get_now_playing, name='now-playing'),
     path('secret-admin/', admin.site.urls),
     path('', views.home, name = 'home'),
+    
+    # Include TRMNL service URLs
+    path('api/trmnl/', include('trmnl_service.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
