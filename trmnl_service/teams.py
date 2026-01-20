@@ -1,0 +1,57 @@
+TEAM_MAP = {
+    # --- EMEA ---
+    "Natus Vincere": "NAVI",
+    "Karmine Corp": "KC",
+    "Fnatic": "FNC",
+    "Gentle Mates": "M8",
+    "Team Vitality": "VIT",
+    "FUT Esports": "FUT",
+    "BBL Esports": "BBL",
+    "PCIFIC Esports": "PCF",
+    "Team Heretics": "TH",
+    "Team Liquid": "TL",
+    "GIANTX": "GX",
+    "ULF Esports": "ULF",
+
+    # --- AMERICAS ---
+    "Evil Geniuses": "EG",
+    "G2 Esports": "G2",
+    "100 Thieves": "100T",
+    "Cloud9": "C9",
+    "FURIA": "FUR",
+    "KRÜ Esports": "KRÜ",
+    "Leviatán": "LEV",
+    "LOUD": "LOUD",
+    "MIBR": "MIBR",
+    "NRG": "NRG",
+    "Sentinels": "SEN",
+    "ENVY": "ENVY",
+
+    # --- PACIFIC ---
+    "DetonatioN FocusMe": "DFM",
+    "DRX": "DRX",
+    "Gen.G": "GEN",
+    "Global Esports": "GE",
+    "Paper Rex": "PRX",
+    "Rex Regum Qeon": "RRQ",
+    "T1": "T1",
+    "Team Secret": "TS",
+    "ZETA DIVISION": "ZETA",
+    "FULL SENSE": "FS",
+    "Nongshim RedForce": "NS",
+    "VARREL": "VL",
+
+    # --- CHINA ---
+    "All Gamers": "AG",
+    "Bilibili Gaming": "BLG",
+    "EDward Gaming": "EDG",
+    "FunPlus Phoenix": "FPX",
+    "JD Gaming": "JDG",
+    "Nova Esports": "NOVA",
+    "Titan Esports Club": "TEC",
+    "Trace Esports": "TE",
+    "TYLOO": "TYL",
+    "Wolves Esports": "WOL",
+    "Dragon Ranger Gaming": "DRG",
+    "XLG Esports": "XLG"
+}
