@@ -1,6 +1,7 @@
 import requests
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
+from .teams import TEAM_MAP
 
 class VLRService:
     MATCHES_URL = "https://vlr.orlandomm.net/api/v1/matches"
@@ -26,7 +27,7 @@ class VLRService:
         return {
             **results, # Contains y_res and t_res
             **matches, # Contains live, t_up, and tom_up
-            "last_updated": now.strftime("%H:%M")
+            "last_updated": now.strftime("%H:%M").lower()
         }
 
     # --- Private Logic: Processing ---
@@ -99,15 +100,24 @@ class VLRService:
         time_str = ""
 
         if ts:
+            # Apply 6-hour correction and convert to London Time
             corrected_ts = ts + (VLRService.TIME_OFFSET_HOURS * 3600)
-            dt_utc = datetime.fromtimestamp(corrected_ts, tz=ZoneInfo("UTC"))
-            dt_london = dt_utc.astimezone(VLRService.LONDON_TZ)
-            time_str = dt_london.strftime("%H:%M")
+            dt_london = datetime.fromtimestamp(corrected_ts, tz=ZoneInfo("UTC")).astimezone(VLRService.LONDON_TZ)
+            
+            # FORMAT: 12-hour time
+            time_str = dt_london.strftime("%I:%M%p").lower().lstrip('0')
+            
+        t1_full = data['teams'][0]['name']
+        t2_full = data['teams'][1]['name']
+
+        # Check if abbreviation exists, otherwise use full name
+        t1_display = TEAM_MAP.get(t1_full, t1_full)
+        t2_display = TEAM_MAP.get(t2_full, t2_full)
             
         return {
-            "t1": data['teams'][0]['name'],
+            "t1": t1_display,
             "s1": data['teams'][0].get('score'),
-            "t2": data['teams'][1]['name'],
+            "t2": t2_display,
             "s2": data['teams'][1].get('score'),
             "tournament": data.get('tournament'),
             "event": data.get('event'),
