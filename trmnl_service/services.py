@@ -17,12 +17,14 @@ class VLRService:
         
         # 1. Fetch raw data
         raw_matches = cls._fetch_data(cls.MATCHES_URL)
-        raw_results = cls._fetch_data(cls.RESULTS_URL, params={"page": "1"})
+        # raw_results = cls._fetch_data(cls.RESULTS_URL, params={"page": "1"}) commented out due to TRMNL issues
 
         # 2. Process and Filter
-        # We split these so you can debug 'Matches' and 'Results' independently.
+        # We split these so we can debug 'Matches' and 'Results' independently.
         matches = cls._process_matches(raw_matches, now)
-        results = cls._process_results(raw_results, now)
+        #results = cls._process_results(raw_results, now)
+        
+        results = {"y_res": [], "t_res": []}  # Placeholder due to TRMNL issues
 
         return {
             **results, # Contains y_res and t_res
@@ -55,6 +57,7 @@ class VLRService:
         return buckets
 
     @classmethod
+    # TODO: Look into improving this logic due to API timezone issues
     def _process_results(cls, raw_data, now):
         """Handles COMPLETED match logic using the 'ago' field."""
         buckets = {"y_res": [], "t_res": []}
@@ -113,13 +116,17 @@ class VLRService:
         # Check if abbreviation exists, otherwise use full name
         t1_display = TEAM_MAP.get(t1_full, t1_full)
         t2_display = TEAM_MAP.get(t2_full, t2_full)
+        
+        # Strip "VCT 2026:" or just "VCT 2026" and any surrounding whitespace
+        raw_tournament = data.get('tournament', '')
+        clean_tournament = raw_tournament.replace("VCT 2026", "").replace(":", "").strip()
             
         return {
             "t1": t1_display,
             "s1": data['teams'][0].get('score'),
             "t2": t2_display,
             "s2": data['teams'][1].get('score'),
-            "tournament": data.get('tournament'),
+            "tournament": clean_tournament,
             "event": data.get('event'),
             "status": data.get('status'),
             "time": time_str
