@@ -2,7 +2,7 @@ TEAM_MAP = {
     # --- EMEA ---
     "Natus Vincere": "NAVI",
     "Karmine Corp": "KC",
-    "Fnatic": "FNC",
+    "FNATIC": "FNC",
     "Gentle Mates": "M8",
     "Team Vitality": "VIT",
     "FUT Esports": "FUT",
@@ -20,7 +20,7 @@ TEAM_MAP = {
     "Cloud9": "C9",
     "FURIA": "FUR",
     "KRÜ Esports": "KRÜ",
-    "Leviatán": "LEV",
+    "LEVIATÁN": "LEV",
     "LOUD": "LOUD",
     "MIBR": "MIBR",
     "NRG": "NRG",
@@ -53,5 +53,5 @@ TEAM_MAP = {
     "TYLOO": "TYL",
     "Wolves Esports": "WOL",
     "Dragon Ranger Gaming": "DRG",
-    "XLG Esports": "XLG"
+    "Xi Lai Gaming": "XLG"
 }
