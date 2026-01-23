@@ -17,14 +17,13 @@ class VLRService:
         
         # 1. Fetch raw data
         raw_matches = cls._fetch_data(cls.MATCHES_URL)
-        # raw_results = cls._fetch_data(cls.RESULTS_URL, params={"page": "1"}) commented out due to TRMNL issues
+        raw_results = cls._fetch_data(cls.RESULTS_URL, params={"page": "1"})
 
         # 2. Process and Filter
         # We split these so we can debug 'Matches' and 'Results' independently.
         matches = cls._process_matches(raw_matches, now)
-        #results = cls._process_results(raw_results, now)
+        results = cls._process_results(raw_results, now)
         
-        results = {"y_res": [], "t_res": []}  # Placeholder due to TRMNL issues
 
         return {
             **results, # Contains y_res and t_res
