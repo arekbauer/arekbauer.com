@@ -6,7 +6,7 @@ from .teams import TEAM_MAP
 class VLRService:
     MATCHES_URL = "https://vlr.orlandomm.net/api/v1/matches"
     RESULTS_URL = "https://vlr.orlandomm.net/api/v1/results"
-    WHITELIST = "VCT 2026"
+    WHITELIST = ["VCT 2026", "Valorant Masters"]
     LONDON_TZ = ZoneInfo("Europe/London")
     TIME_OFFSET_HOURS = 6
 
@@ -88,7 +88,8 @@ class VLRService:
     @staticmethod
     def _is_whitelisted(item):
         """Centralized check for your tournament whitelist."""
-        return VLRService.WHITELIST in item.get('tournament', '')
+        tournament = item.get('tournament', '')
+        return any(w in tournament for w in VLRService.WHITELIST)
 
     @staticmethod
     def _is_date(utc_string, target_dt):
