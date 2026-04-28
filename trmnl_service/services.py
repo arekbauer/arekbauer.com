@@ -8,7 +8,7 @@ class VLRService:
     RESULTS_URL = "https://vlr.orlandomm.net/api/v1/results"
     WHITELIST = ["VCT 2026", "Valorant Masters"]
     LONDON_TZ = ZoneInfo("Europe/London")
-    TIME_OFFSET_HOURS = 6
+    TIME_OFFSET_HOURS = 4
 
     @classmethod
     def get_vct_dashboard_data(cls):
