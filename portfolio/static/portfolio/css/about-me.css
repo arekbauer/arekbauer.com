@@ -46,22 +46,25 @@
 .left h3 {
     color: var(--text-color);
     font-family: var(--heading-font);
-    font-weight: 700;
+    font-weight: 850;
     font-size: clamp(2.5rem, 5vw, 4rem);
+    font-variation-settings: 'opsz' 72, 'slnt' -8, 'wdth' 112, 'wght' 850;
+    letter-spacing: 0;
     margin-bottom: 1.5rem;
     line-height: 1.1;
 }
 
 .highlight {
     color: var(--accent-color);
+    font-variation-settings: 'opsz' 72, 'slnt' 0, 'wdth' 125, 'wght' 900;
 }
 
 .about-me p {
     color: var(--secondary-color);
     font-family: var(--body-font);
-    font-weight: 400;
-    font-size: 1.125rem;
-    line-height: 1.8;
+    font-weight: 500;
+    font-size: clamp(1.12rem, 0.5vw + 1rem, 1.18rem);
+    line-height: 1.75;
     margin-bottom: 1.5rem;
 }
 
@@ -172,7 +175,8 @@
 .song-title {
     font-family: var(--heading-font);
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 680;
+    font-variation-settings: 'opsz' 18, 'slnt' -3, 'wdth' 104, 'wght' 680;
     color: var(--text-color);
     white-space: nowrap;
     overflow: hidden;

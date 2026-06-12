@@ -29,7 +29,9 @@
 .project-title {
     font-family: var(--heading-font);
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: 760;
+    font-variation-settings: 'opsz' 32, 'slnt' -4, 'wdth' 108, 'wght' 760;
+    letter-spacing: 0;
     color: var(--text-color);
     margin-bottom: 1rem;
 }

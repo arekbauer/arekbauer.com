@@ -27,19 +27,24 @@
 .company-name {
     font-family: var(--heading-font);
     font-size: 1.25rem;
-    font-weight: 700;
+    font-weight: 780;
+    font-variation-settings: 'opsz' 28, 'slnt' -5, 'wdth' 110, 'wght' 780;
+    letter-spacing: 0;
     color: var(--accent-color);
 }
 
 .job-title {
     font-size: 1.1rem;
     color: var(--text-color);
-    font-weight: 600;
+    font-family: var(--heading-font);
+    font-weight: 650;
+    font-variation-settings: 'opsz' 22, 'slnt' -2, 'wdth' 102, 'wght' 650;
 }
 
 .duration {
     font-family: var(--heading-font);
     font-size: 0.875rem;
+    font-variation-settings: 'opsz' 16, 'slnt' -3, 'wdth' 96, 'wght' 520;
     color: var(--secondary-color);
 }
 

@@ -26,6 +26,52 @@ const disableLightmode = () => {
 // Checks memory if lightmode was active last
 if(lightmode === "active") enableLightmode()
 
+function initPointerBackground() {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const coarsePointer = window.matchMedia('(pointer: coarse)');
+
+    if (reducedMotion.matches || coarsePointer.matches) return;
+
+    const root = document.documentElement;
+    const pointer = {
+        targetX: window.innerWidth * 0.78,
+        targetY: window.innerHeight * 0.28,
+        x: window.innerWidth * 0.78,
+        y: window.innerHeight * 0.28,
+    };
+    let rafId = null;
+
+    const updatePointer = (event) => {
+        pointer.targetX = event.clientX;
+        pointer.targetY = event.clientY;
+
+        if (!rafId) {
+            rafId = requestAnimationFrame(renderPointerBackground);
+        }
+    };
+
+    const renderPointerBackground = () => {
+        pointer.x += (pointer.targetX - pointer.x) * 0.08;
+        pointer.y += (pointer.targetY - pointer.y) * 0.08;
+
+        root.style.setProperty('--cursor-x', `${pointer.x.toFixed(1)}px`);
+        root.style.setProperty('--cursor-y', `${pointer.y.toFixed(1)}px`);
+
+        if (
+            Math.abs(pointer.targetX - pointer.x) > 0.5 ||
+            Math.abs(pointer.targetY - pointer.y) > 0.5
+        ) {
+            rafId = requestAnimationFrame(renderPointerBackground);
+        } else {
+            rafId = null;
+        }
+    };
+
+    window.addEventListener('pointermove', updatePointer, { passive: true });
+}
+
+initPointerBackground();
+
 
 // When my lightmode/darkmode button is clicked...
 themeSwitch.addEventListener("click", () => {
