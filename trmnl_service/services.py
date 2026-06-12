@@ -6,7 +6,7 @@ from .teams import TEAM_MAP
 class VLRService:
     MATCHES_URL = "https://vlr.orlandomm.net/api/v1/matches"
     RESULTS_URL = "https://vlr.orlandomm.net/api/v1/results"
-    WHITELIST = ["VCT 2026", "Valorant Masters"]
+    WHITELIST = ["VCT 2026", "Valorant Masters", "Valorant Masters London 2026"]
     LONDON_TZ = ZoneInfo("Europe/London")
     TIME_OFFSET_HOURS = 4
 
