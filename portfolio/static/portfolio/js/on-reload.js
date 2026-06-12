@@ -26,59 +26,61 @@ const disableLightmode = () => {
 // Checks memory if lightmode was active last
 if(lightmode === "active") enableLightmode()
 
-function initPointerBackground() {
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const coarsePointer = window.matchMedia('(pointer: coarse)');
+const navLinks = Array.from(document.querySelectorAll('.navbar a[href^="#"]'));
+const sections = navLinks
+    .map(link => document.querySelector(link.getAttribute('href')))
+    .filter(Boolean);
 
-    if (reducedMotion.matches || coarsePointer.matches) return;
+const setActiveNavLink = (sectionId) => {
+    navLinks.forEach(link => {
+        const isActive = link.getAttribute('href') === `#${sectionId}`;
+        link.classList.toggle('active', isActive);
 
-    const root = document.documentElement;
-    const pointer = {
-        targetX: window.innerWidth * 0.78,
-        targetY: window.innerHeight * 0.28,
-        x: window.innerWidth * 0.78,
-        y: window.innerHeight * 0.28,
-    };
-    let rafId = null;
-
-    const updatePointer = (event) => {
-        pointer.targetX = event.clientX;
-        pointer.targetY = event.clientY;
-
-        if (!rafId) {
-            rafId = requestAnimationFrame(renderPointerBackground);
-        }
-    };
-
-    const renderPointerBackground = () => {
-        pointer.x += (pointer.targetX - pointer.x) * 0.08;
-        pointer.y += (pointer.targetY - pointer.y) * 0.08;
-
-        root.style.setProperty('--cursor-x', `${pointer.x.toFixed(1)}px`);
-        root.style.setProperty('--cursor-y', `${pointer.y.toFixed(1)}px`);
-
-        if (
-            Math.abs(pointer.targetX - pointer.x) > 0.5 ||
-            Math.abs(pointer.targetY - pointer.y) > 0.5
-        ) {
-            rafId = requestAnimationFrame(renderPointerBackground);
+        if (isActive) {
+            link.setAttribute('aria-current', 'page');
         } else {
-            rafId = null;
+            link.removeAttribute('aria-current');
         }
-    };
+    });
+};
 
-    window.addEventListener('pointermove', updatePointer, { passive: true });
+if (sections.length > 0) {
+    setActiveNavLink(sections[0].id);
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+        const visibleSection = entries
+            .filter(entry => entry.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (visibleSection) {
+            setActiveNavLink(visibleSection.target.id);
+        }
+    }, {
+        rootMargin: '-28% 0px -55% 0px',
+        threshold: [0, 0.2, 0.5],
+    });
+
+    sections.forEach(section => sectionObserver.observe(section));
 }
 
-initPointerBackground();
-
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        const sidebarToggle = document.getElementById('sidebar-active');
+        if (sidebarToggle) sidebarToggle.checked = false;
+    });
+});
 
 // When my lightmode/darkmode button is clicked...
 themeSwitch.addEventListener("click", () => {
+    document.body.classList.add('theme-transitioning');
     lightmode = localStorage.getItem('lightmode')
     lightmode !== "active" ? enableLightmode() : disableLightmode()
     removeAnnotations();
     roughNotionFunction();
+
+    window.setTimeout(() => {
+        document.body.classList.remove('theme-transitioning');
+    }, 700);
 })
 
 // My Rough Notation handler

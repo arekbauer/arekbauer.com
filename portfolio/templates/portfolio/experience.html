@@ -1,12 +1,14 @@
 <div class="container py-5 d-flex flex-column" style="max-width: 800px;">
   <header class="mb-4">
-    <h1 id="container-headers">Experience</h1>
+    <p class="section-label">Where I've worked</p>
+    <h1 class="container-header">Experience</h1>
   </header>
   <br>
 
-  <div class="d-flex flex-column gap-4">
+  <div class="experience-timeline">
     {% for experience in experiences reversed %}
-    <div class="experience-card">
+    <div class="experience-entry">
+      <div class="experience-card">
       <div class="experience-header">
         <div class="experience-left">
           <h2 class="company-name">{{ experience.subtitle }}</h2>
@@ -20,6 +22,7 @@
         {% for skill in experience.get_skills_list %}
             <span class="tech-tag">{{ skill }}</span>
         {% endfor %}
+      </div>
       </div>
     </div>
     {% endfor %}
