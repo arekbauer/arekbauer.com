@@ -26,13 +26,61 @@ const disableLightmode = () => {
 // Checks memory if lightmode was active last
 if(lightmode === "active") enableLightmode()
 
+const navLinks = Array.from(document.querySelectorAll('.navbar a[href^="#"]'));
+const sections = navLinks
+    .map(link => document.querySelector(link.getAttribute('href')))
+    .filter(Boolean);
+
+const setActiveNavLink = (sectionId) => {
+    navLinks.forEach(link => {
+        const isActive = link.getAttribute('href') === `#${sectionId}`;
+        link.classList.toggle('active', isActive);
+
+        if (isActive) {
+            link.setAttribute('aria-current', 'page');
+        } else {
+            link.removeAttribute('aria-current');
+        }
+    });
+};
+
+if (sections.length > 0) {
+    setActiveNavLink(sections[0].id);
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+        const visibleSection = entries
+            .filter(entry => entry.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (visibleSection) {
+            setActiveNavLink(visibleSection.target.id);
+        }
+    }, {
+        rootMargin: '-28% 0px -55% 0px',
+        threshold: [0, 0.2, 0.5],
+    });
+
+    sections.forEach(section => sectionObserver.observe(section));
+}
+
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        const sidebarToggle = document.getElementById('sidebar-active');
+        if (sidebarToggle) sidebarToggle.checked = false;
+    });
+});
 
 // When my lightmode/darkmode button is clicked...
 themeSwitch.addEventListener("click", () => {
+    document.body.classList.add('theme-transitioning');
     lightmode = localStorage.getItem('lightmode')
     lightmode !== "active" ? enableLightmode() : disableLightmode()
     removeAnnotations();
     roughNotionFunction();
+
+    window.setTimeout(() => {
+        document.body.classList.remove('theme-transitioning');
+    }, 700);
 })
 
 // My Rough Notation handler
