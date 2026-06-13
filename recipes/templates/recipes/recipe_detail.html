@@ -1,0 +1,112 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}{{ recipe.title }} | Recipes{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'recipes/css/recipes.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="recipe-detail-page">
+  <div class="container recipe-detail-container">
+    <a href="{% url 'recipes:list' %}" class="back-to-recipes">&larr; All recipes</a>
+
+    <header class="recipe-detail-hero">
+      <div class="recipe-detail-copy">
+        <div class="recipe-card-meta">
+          {% for category in recipe.categories.all %}
+            <a href="{% url 'recipes:list' %}?category={{ category.slug }}">{{ category.name }}</a>
+          {% endfor %}
+        </div>
+        <h1>{{ recipe.title }}</h1>
+        <p>Adjust the servings below and the ingredient quantities will update automatically.</p>
+        {% if recipe.source_url %}
+          <a class="recipe-source-link" href="{{ recipe.source_url }}" target="_blank" rel="noopener noreferrer">
+            {{ recipe.source_name|default:"Original recipe" }}
+            <span aria-hidden="true">&nearr;</span>
+          </a>
+        {% endif %}
+      </div>
+      <figure class="recipe-detail-visual">
+        <img
+          src="{{ recipe.image.url }}"
+          alt="{{ recipe.title }}"
+          class="recipe-detail-image"
+        >
+        {% if recipe.image_credit %}
+          <figcaption>
+            Photo:
+            {% if recipe.image_credit_url %}
+              <a href="{{ recipe.image_credit_url }}" target="_blank" rel="noopener noreferrer">{{ recipe.image_credit }}</a>
+            {% else %}
+              {{ recipe.image_credit }}
+            {% endif %}
+          </figcaption>
+        {% endif %}
+      </figure>
+    </header>
+
+    <div class="recipe-content-grid">
+      <aside class="ingredients-panel">
+        <div class="ingredients-heading">
+          <div>
+            <p class="section-label">Prepare</p>
+            <h2>Ingredients</h2>
+          </div>
+          <div class="servings-control" data-base-servings="{{ recipe.base_servings }}">
+            <span id="servings-label">Servings</span>
+            <div class="servings-input-group">
+              <button type="button" data-serving-action="decrease" aria-label="Decrease servings">&minus;</button>
+              <input id="servings" type="number" min="1" max="99" value="{{ recipe.base_servings }}" inputmode="numeric" aria-labelledby="servings-label">
+              <button type="button" data-serving-action="increase" aria-label="Increase servings">&plus;</button>
+            </div>
+          </div>
+        </div>
+
+        {% regroup recipe.ingredients.all by section as ingredient_sections %}
+        {% for ingredient_section in ingredient_sections %}
+          {% if ingredient_section.grouper %}
+            <h3 class="ingredient-section-title">{{ ingredient_section.grouper }}</h3>
+          {% endif %}
+          <ul class="ingredient-list">
+          {% for ingredient in ingredient_section.list %}
+            <li>
+              {% if ingredient.amount is not None %}
+                <span class="ingredient-amount" data-base-amount="{{ ingredient.amount }}">{{ ingredient.amount|floatformat:"-3" }}</span>
+              {% endif %}
+              {% if ingredient.unit %}<span class="ingredient-unit">{{ ingredient.unit }}</span>{% endif %}
+              <span class="ingredient-name">{{ ingredient.name }}</span>
+              {% if ingredient.note %}<span class="ingredient-note">, {{ ingredient.note }}</span>{% endif %}
+            </li>
+          {% endfor %}
+          </ul>
+        {% empty %}
+          <ul class="ingredient-list">
+            <li>Ingredients coming soon.</li>
+          </ul>
+        {% endfor %}
+      </aside>
+
+      <section class="method-panel">
+        <p class="section-label">Make it</p>
+        <h2>Method</h2>
+        <ol class="recipe-steps">
+          {% for step in recipe.steps.all %}
+            <li>
+              <span class="step-number" aria-hidden="true">{{ forloop.counter|stringformat:"02d" }}</span>
+              <p>{{ step.instruction|linebreaksbr }}</p>
+            </li>
+          {% empty %}
+            <li><p>Steps coming soon.</p></li>
+          {% endfor %}
+        </ol>
+      </section>
+    </div>
+  </div>
+</main>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'recipes/js/servings.js' %}" defer></script>
+{% endblock %}

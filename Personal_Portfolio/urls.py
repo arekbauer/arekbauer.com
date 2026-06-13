@@ -25,6 +25,7 @@ urlpatterns = [
     # Website URLs
     path('api/now-playing/', views.get_now_playing, name='now-playing'),
     path('secret-admin/', admin.site.urls),
+    path('recipes/', include('recipes.urls')),
     path('', views.home, name = 'home'),
     
     # Include TRMNL service URLs

@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     'livereload',
     'django.contrib.staticfiles',
     'portfolio',
+    'recipes',
 ]
 
 MIDDLEWARE = [

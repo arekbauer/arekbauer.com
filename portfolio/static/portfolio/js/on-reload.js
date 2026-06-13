@@ -1,8 +1,14 @@
-import { annotate, annotationGroup  } from './rough-notation.esm.js';
-
 let blueClear = 'rgba(45, 212, 191, 0.25)';
 let lighterBlue = '#2dd4bf';
 let annotationGroupInstance = null;
+let annotate = null;
+let annotationGroup = null;
+
+if (document.querySelector('.highlight, .about-me span')) {
+    const roughNotation = await import('./rough-notation.esm.js');
+    annotate = roughNotation.annotate;
+    annotationGroup = roughNotation.annotationGroup;
+}
 
 let lightmode = localStorage.getItem('lightmode')
 const themeSwitch = document.getElementById('theme-switch')
@@ -26,14 +32,14 @@ const disableLightmode = () => {
 // Checks memory if lightmode was active last
 if(lightmode === "active") enableLightmode()
 
-const navLinks = Array.from(document.querySelectorAll('.navbar a[href^="#"]'));
+const navLinks = Array.from(document.querySelectorAll('.navbar a[data-section]'));
 const sections = navLinks
-    .map(link => document.querySelector(link.getAttribute('href')))
+    .map(link => document.getElementById(link.dataset.section))
     .filter(Boolean);
 
 const setActiveNavLink = (sectionId) => {
     navLinks.forEach(link => {
-        const isActive = link.getAttribute('href') === `#${sectionId}`;
+        const isActive = link.dataset.section === sectionId;
         link.classList.toggle('active', isActive);
 
         if (isActive) {
@@ -86,6 +92,8 @@ themeSwitch.addEventListener("click", () => {
 // My Rough Notation handler
 function roughNotionFunction() {
     removeAnnotations();
+
+    if (!annotate || !annotationGroup) return;
 
     // Define variables
     const textAnnotations = [];
