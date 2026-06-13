@@ -2,7 +2,7 @@ from decimal import Decimal
 
 from django.contrib import admin
 from django.core.exceptions import ValidationError
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.urls import reverse
 
 from .admin import IngredientInline, RecipeStepInline
@@ -79,6 +79,7 @@ class RecipeModelTests(TestCase):
             invalid_amount.full_clean()
 
 
+@override_settings(SECURE_SSL_REDIRECT=False)
 class RecipeViewTests(TestCase):
     @classmethod
     def setUpTestData(cls):
