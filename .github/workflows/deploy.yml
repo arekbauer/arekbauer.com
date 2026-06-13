@@ -45,6 +45,7 @@ jobs:
 
       - name: Validate Django Project
         env:
+          DJANGO_SETTINGS_MODULE: "Personal_Portfolio.test_settings"
           SECRET_KEY: "django-dummy-key"
           SPOTIFY_CLIENT_ID: "test-client-id"
           SPOTIFY_CLIENT_SECRET: "test-client-secret"
@@ -56,6 +57,7 @@ jobs:
 
       - name: Run Django Tests
         env:
+          DJANGO_SETTINGS_MODULE: "Personal_Portfolio.test_settings"
           SECRET_KEY: "django-dummy-key"
           SPOTIFY_CLIENT_ID: "test-client-id"
           SPOTIFY_CLIENT_SECRET: "test-client-secret"
