@@ -1,0 +1,65 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}Recipes | Arkadiusz Bauer{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'recipes/css/recipes.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="recipes-page">
+  <section class="recipes-hero container">
+    <p class="section-label">From my kitchen</p>
+    <h1 class="container-header">Recipes</h1>
+    <p class="recipes-intro">A collection of recipes I enjoy making.</p>
+  </section>
+
+  <section class="recipe-gallery-section">
+    <div class="container recipes-container">
+      <nav class="category-filters" aria-label="Filter recipes by category">
+        <a href="{% url 'recipes:list' %}" class="category-filter{% if not selected_category %} active{% endif %}"{% if not selected_category %} aria-current="page"{% endif %}>All recipes</a>
+        {% for category in categories %}
+          <a href="{% url 'recipes:list' %}?category={{ category.slug }}" class="category-filter{% if selected_category == category %} active{% endif %}"{% if selected_category == category %} aria-current="page"{% endif %}>{{ category.name }}</a>
+        {% endfor %}
+      </nav>
+
+      {% if recipes %}
+        <div class="recipe-grid">
+          {% for recipe in recipes %}
+            <article class="recipe-card">
+              <a href="{% url 'recipes:detail' recipe.slug %}" class="recipe-card-image">
+                <img
+                  src="{{ recipe.image.url }}"
+                  alt="{{ recipe.title }}"
+                  loading="lazy"
+                  decoding="async"
+                  width="800"
+                  height="600"
+                >
+              </a>
+              <div class="recipe-card-content">
+                <div class="recipe-card-meta">
+                  {% for category in recipe.categories.all %}
+                    <span>{{ category.name }}</span>
+                  {% endfor %}
+                </div>
+                <h2><a href="{% url 'recipes:detail' recipe.slug %}">{{ recipe.title }}</a></h2>
+                <a href="{% url 'recipes:detail' recipe.slug %}" class="recipe-card-link">
+                  View recipe
+                  <span aria-hidden="true">&rarr;</span>
+                </a>
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="recipes-empty">
+          <h2>No recipes here yet</h2>
+          <p>Try another category or check back after the next kitchen experiment.</p>
+        </div>
+      {% endif %}
+    </div>
+  </section>
+</main>
+{% endblock %}

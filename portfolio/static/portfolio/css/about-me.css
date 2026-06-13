@@ -82,6 +82,15 @@
     margin-bottom: 1.5rem;
 }
 
+.about-me .cooking-intro a {
+    font-weight: 750;
+}
+
+.about-me .cooking-intro a:hover {
+    color: var(--text-color);
+    text-decoration-color: var(--accent-color);
+}
+
 /* Profile Picture */
 .profile-pic {
     width: 100%;

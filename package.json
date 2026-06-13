@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "test": "node --test recipes/tests_js/servings.test.cjs"
+  },
   "dependencies": {
     "isotope-layout": "^3.0.6",
     "rough-notation": "^0.5.1"
