@@ -10,6 +10,7 @@ from django.urls import reverse
 from .models import Experience, Intro, Project
 
 
+@override_settings(SECURE_SSL_REDIRECT=False)
 class HomepageTests(TestCase):
     @classmethod
     def setUpTestData(cls):
@@ -70,6 +71,7 @@ class HomepageTests(TestCase):
 
 
 @override_settings(
+    SECURE_SSL_REDIRECT=False,
     SPOTIFY_CLIENT_ID="client-id",
     SPOTIFY_CLIENT_SECRET="client-secret",
     SPOTIFY_REFRESH_TOKEN="refresh-token",
