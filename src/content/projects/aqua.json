@@ -1,0 +1,12 @@
+{
+  "order": 18,
+  "title": "Aqua",
+  "description": "Aqua is a private, local-first hydration tracking app for Android with a focus on Material 3 Expressive UI, built with Jetpack Compose.",
+  "image": "portfolio/images/aqua_showcase.jpg",
+  "url": "https://github.com/arekbauer/Aqua",
+  "skills": [
+    "Kotlin",
+    "Jetpack Compose",
+    "Android"
+  ]
+}
