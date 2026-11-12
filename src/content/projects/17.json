@@ -1,7 +1,7 @@
 {
   "title": "FaceDown",
   "description": "A focus-driven Android app that uses device orientation to silence distractions. Featured on HowToMen, this project implements a foreground service for a timer, sensor-based logic, and localised support for multiple languages.",
-  "image": "portfolio/images/facedown_url.png",
+  "image": "portfolio/images/facedown_showcase.jpg",
   "url": "https://github.com/arekbauer/FaceDown",
   "skills": [
     "Kotlin",
