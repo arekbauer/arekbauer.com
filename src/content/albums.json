@@ -168,5 +168,25 @@
     "spotifyUrl": "https://open.spotify.com/album/1S9MukUQEFAYCqlfrwqMd6",
     "releaseDate": "2024-02-16",
     "displayOrder": 0
+  },
+  {
+    "title": "Life 1",
+    "artist": "Quadeca",
+    "featured": true,
+    "spotifyAlbumId": "1QFbsd56xkkvG1WE51O1bD?si=pPmkSAx3SjGvHS7vCmNXnw",
+    "coverImageUrl": "https://i.scdn.co/image/ab67616d0000b273022501794da0a51a2fcfb81a",
+    "spotifyUrl": "https://open.spotify.com/album/1QFbsd56xkkvG1WE51O1bD?si=pPmkSAx3SjGvHS7vCmNXnw",
+    "releaseDate": "2026-10-01",
+    "displayOrder": 0
+  },
+  {
+    "title": "marroW",
+    "artist": "brakence",
+    "featured": true,
+    "spotifyAlbumId": "1XJET4J6WgkMkalolZojgR?si=4nXZbZZIRjypE85ww48Uxg",
+    "coverImageUrl": "https://i.scdn.co/image/ab67616d0000b273155d39be706095403e6a365d",
+    "spotifyUrl": "https://open.spotify.com/album/1XJET4J6WgkMkalolZojgR?si=4nXZbZZIRjypE85ww48Uxg",
+    "releaseDate": "2026-10-23",
+    "displayOrder": 0
   }
 ]
